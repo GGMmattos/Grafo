@@ -1,29 +1,49 @@
 import os
+
 lista = []
-teste = []
 
-def le_txt(dados):
+class Grafo:
 
-    if os.path.isfile('grafo.txt'): #Verifica se o arquivo esá OK
-        file = open('grafo.txt', 'r')
+    def __init__(self, vertices):
+        self.vertices = vertices
+        self.grafo = [[] for i in range(self.vertices)]
 
-        for i in file.readlines(): #Itera por todas as linhas do arquivo
-            graph = i.strip().split(' ') #Da o split se contém 2 espaços
-            dados.append(graph[0])
-    print(dados)
-    return dados
+    def le_txt(self, dados):
+        self.dados = dados
+        if os.path.isfile('grafo.txt'):  # Verifica se o arquivo esá OK
+            file = open('grafo.txt', 'r')
 
-def adiciona_aresta():
-            #pensando em grafos direcionados sem peso nas arestas
-            self.grafo[u-1].append(v)
+            for i in file.readlines():  # Itera por todas as linhas do arquivo
+                graph = i.strip().split(' ')  # Da o split se contém 2 espaços
+                self.dados.append(graph[0])
+        return self.dados
 
-data = le_txt(lista)
+    # def adiciona_aresta(self, dados):
+    #         #pensando em grafos direcionados sem peso nas arestas
+    #         self.grafo[dados[1]].append(dados[2])
 
-for i in data:
-    graph1 = i.strip().split(' ')
-    teste.append(graph1[0])
+    def mostra_lista(self):
+        for i in range(self.vertices):
+            print(f'{i + 1}:', end='  ')
+            for j in self.grafo[i]:
+                print(f'{j}   ->', end='  ')
+            print(' ')
 
-print(teste)
+
+g = Grafo(5)
+
+data = g.le_txt(lista)
+print(data[1])
+#g.adiciona_aresta(data)
+g.mostra_lista()
+
+# data = le_txt(lista)
+#
+# for i in data:
+#     graph1 = i.strip().split(' ')
+#     teste.append(graph1[0])
+#
+# print(teste)
 """
 if dado[0] == 'directed':
     print("Modo Direcionado")
@@ -34,9 +54,6 @@ elif dado[0] == 'undirected':
 # arquivo.close()
 
 # class Grafo:
-  
-
-
 
 
 # with open ('grafo.txt', 'r') as arquivo:
@@ -45,8 +62,6 @@ elif dado[0] == 'undirected':
 
 # vertices =grafo.split()
 # print(vertices)
-
-
 
 
 # GRAFO = { 'A': [],

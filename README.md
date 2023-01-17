@@ -11,4 +11,4 @@ A primeira linha do arquivo contém informação se o grafo é orientado (direct
 7. Desenvolver uma função que devolve todos os vértices que são incidentes em um vértice.
 8. Desenvolver uma função que devolve o grafo complemento.
 9. Desenvolver uma função que devolve o grafo transposto (grafo formado pela inversão de todas as arestas).
-10. Para cada item acima, deixe na forma de comentário qual a complexidade de tempo das funções que você
+10. Para cada item acima, deixe na forma de comentário qual a complexidade de tempo das funções que você desenvolveu.

@@ -1,9 +1,6 @@
-# Trabalho-1-Grafos1.
-
-Ler de um arquivo a especificação de um grafo e representá-lo computacionalmente por listas de adjacência.
+# Trabalho-1-Grafos
+1.Ler de um arquivo a especificação de um grafo e representá-lo computacionalmente por listas de adjacência.
 A primeira linha do arquivo contém informação se o grafo é orientado (directed) ou não (undirected). 
-
-
 2. Desenvolver operações para inserção e remoção de vértices e arestas.
 3. Desenvolver procedimento para mostrar o grafo.
 4. Desenvolver uma função que devolve a representação do grafo em matriz de adjacência.

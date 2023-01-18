@@ -1,44 +1,4 @@
-# import os
-# import sys
-#
-# #Para checar e ler o segundo argumento da chamada como txtGrafo (txtGrafo: nome do arquivo txt)
-# if (len(sys.argv) == 2):
-#     txtGrafo = sys.argv[1]
-# else:
-#     print ("falta arquivo txt como segundo argumento da chamada, ex: (python graph.py arquivo.txt)")
-#     exit()
-#
-# #lista auxilio so pra exemplo
-# aux = []
-# class grafo:
-#
-#     def init(self, dicionario_grafo=None):
-#         if dicionario_grafo is None:
-#             dicionario_grafo = {}
-#         self.dicionario_grafo = dicionario_grafo
-#
-#     def le_txt(self, dados):
-#         self.dados = dados
-#         if os.path.isfile(txtGrafo):
-#             file = open(txtGrafo, 'r')
-#
-#             for i in file.readlines():
-#                 graph = i.strip().split(' ')
-#                 self.dados.append(graph[0])
-#             print(dados)
-#         else:
-#             print ("error")
-#         return self.dados
-#
-#
-# g = grafo(aux)
-#
-#
-# g.le_txt(aux)
-
-
 import os
-
 lista = []
 
 
@@ -84,20 +44,3 @@ elif modo == 'directed':
 
 for k, v in listaAdjascente.items():
     print(f'{k} -> {v}')
-# class Grafo:
-
-
-# with open ('grafo.txt', 'r') as arquivo:
-#     grafo = arquivo.read()
-#     print(grafo)
-
-# vertices =grafo.split()
-# print(vertices)
-
-
-# GRAFO = { 'A': [],
-#           'B': ['A', 'E'],
-#           'C': ['D', 'B'],
-#           'D': ['B'],
-#           'E': ['D', 'B']
-# }

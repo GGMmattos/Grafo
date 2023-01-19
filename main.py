@@ -54,7 +54,7 @@ class grafos:
         self.matriz = [[0] * self.vertices for i in range(self.vertices)]  # criação da matriz que só tem zero
         for i in range(self.vertices):
             print(self.matriz[i])
-        #OBS será implementada a isnerção das arestas na matriz
+        #OBS será implementada a inserção das arestas na matriz
 
 
 #g = grafos()

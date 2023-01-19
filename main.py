@@ -1,6 +1,5 @@
 import os
 
-
 class grafos:
 
     def __init__(self, dados=None, dicionario_grafo=None, vertices=None):  # Sendo none não é obrigadtório passalos ao fazer uma instancia
@@ -58,7 +57,7 @@ class grafos:
 
 
 #g = grafos()
-#d =g.import_graph()
+#d = g.import_graph()
 #g.mostra_grafo()
 #g.mostra_matriz_adjacencia(len(d))
 #conversão de letras em números, creio que de para utilizar

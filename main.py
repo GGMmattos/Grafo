@@ -3,7 +3,7 @@ import os
 
 class grafos:
 
-    def __init__(self, dados=None, dicionario_grafo=None):  # Sendo none não pe obrigadtório passalos ao fazer ao fazer uma instancia
+    def __init__(self, dados=None, dicionario_grafo=None):  # Sendo none não é obrigadtório passalos ao fazer uma instancia
         if dicionario_grafo is None:
             dicionario_grafo = {}
             dados = []
@@ -20,7 +20,7 @@ class grafos:
                 self.dados.append(graph[0])
             file.close()
 
-        self.modo = self.dados[0]
+        self.modo = self.dados[0] #captura do "tipo" do grafo
         del (self.dados[0])
 
         if self.modo == 'undirected':
@@ -48,7 +48,7 @@ class grafos:
 
     def mostra_grafo(self):
         for k, v in self.dicionario_grafo.items():
-            print(f'{k} -> {v}')
+            print(f'{k}: {v}')
 
 g = grafos()
 g.import_graph()

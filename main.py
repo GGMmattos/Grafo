@@ -86,30 +86,44 @@ class grafos:
                 self.dicionario_grafo[self.v2].append(self.v1)
 
     def remover_vertice(self, vertice):
-        self.dicionario_grafo.pop(vertice)
+        self.dicionario_grafo.pop(vertice) #remoção da vertice
+        for k, v in self.dicionario_grafo.items(): #remoção geral da vertice(exclusão das arestas)
+            if vertice in v:
+                del v[v.index(vertice)]
 
-    def remover_aresta(self, ):
-        pass
+    def remover_aresta(self, v1, v2):
+        self.v1 = v1
+        self.v2 = v2
+
+        for k, v in self.dicionario_grafo.items():
+            if k == self.v1:
+                del v[v.index(self.v2)]
+
 
 
 g = grafos()
 d = g.import_graph()
+g.inserir_aresta('c', 'a')
+g.inserir_aresta('d', 'a')
+g.inserir_aresta('e', 'a')
+
 g.mostra_grafo()
 # g.inserir_vertice('f')
 # g.inserir_vertice('g')
 # g.inserir_vertice('f')
 # g.inserir_aresta('a', 'f')
 # g.inserir_aresta('a', 'g')
-g.inserir_aresta('c', 'a')
 print(' ')
 g.remover_vertice('a')
+g.remover_aresta('b','d')
+g.remover_aresta('b','e')
 g.mostra_grafo()
 
 
 
 #g.mostra_matriz_adjacencia(len(d))
-
 #conversão de letras em números, creio que de para utilizar
+
 # l = "a b c"
 # n = []
 # for x in l:

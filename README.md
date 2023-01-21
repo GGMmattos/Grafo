@@ -13,7 +13,7 @@ A primeira linha do arquivo contém informação se o grafo é orientado (direct
 
 6. Desenvolver uma função que devolve todos os vértices adjacentes a um vértice.✔️
 
-7. Desenvolver uma função que devolve todos os vértices que são incidentes em um vértice.
+7. Desenvolver uma função que devolve todos os vértices que são incidentes em um vértice.✔️
 
 8. Desenvolver uma função que devolve o grafo complemento.
 

@@ -2,7 +2,7 @@ import os
 
 
 class grafos:
-    def __init__(self, dados=None, dicionario_grafo=None, vertices=None, directed=False, teste=None, modo=None):  # Sendo none não é obrigadtório passalos ao fazer uma instancia
+    def __init__(self, dados=None, dicionario_grafo=None, vertices=None, directed=False, teste=None, modo=None): 
         if dicionario_grafo is None:
             dicionario_grafo = {}
             dados = []

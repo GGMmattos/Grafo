@@ -1,73 +1,3 @@
-import os
-
-
-# A complexidade de tempo analizada não leva em conta funções internas do python :)
-
-class grafos:
-    def __init__(self, dados=None, dicionario_grafo=None, vertices=None, directed=False,
-                 teste=None):  # Sendo none não é obrigadtório passalos ao fazer uma instancia
-        if dicionario_grafo is None:
-            dicionario_grafo = {}
-            dados = []
-        self.dicionario_grafo = dicionario_grafo
-        self.dados = dados
-        self.teste = teste
-        self.vertices = vertices
-        self.directed = directed
-
-    def import_graph(self, nome_grafo):
-        if os.path.isfile(nome_grafo):  # Verifica se o arquivo esá OK
-            file = open(nome_grafo, 'r')
-            for i in file.readlines():  # Itera por todas as linhas do arquivo
-                graph = i.strip().split('  ')  # Da o split se contém 2 espaços
-                self.dados.append(graph[0])
-            file.close()
-            if self.dados[0] == 'directed':
-                self.directed = True
-            elif self.dados[0] == 'undirected':
-                self.directed = False
-            else:
-                print('Primeira linha do arquivo deve ser preenchida apenas com "directed" ou "undirected"')
-                exit(1)
-            del (self.dados[0])
-            print(self.dados)
-
-    # Complexidade de tempo: O(n)
-
-    def criar_dicionario(self):
-        if not self.directed:
-            print('nao direcionado')
-            for i in range(0, len(self.dados)):
-                self.dicionario_grafo[self.dados[i][0]] = list()
-                if len(self.dados[i]) == 3:
-                    self.dicionario_grafo[self.dados[i][2]] = list()
-
-            for i in range(0, len(self.dados)):
-                if len(self.dados[i]) == 3:
-                    if self.dados[i][2] not in self.dicionario_grafo[self.dados[i][0]]:
-                        self.dicionario_grafo[self.dados[i][0]].append(self.dados[i][2])
-                    if self.dados[i][0] not in self.dicionario_grafo[self.dados[i][2]]:
-                        self.dicionario_grafo[self.dados[i][2]].append(self.dados[i][0])
-
-        elif self.directed:
-            print('direcionado')
-            for i in range(0, len(self.dados)):
-                self.dicionario_grafo[self.dados[i][0]] = list()
-                if len(self.dados[i]) == 3:
-                    self.dicionario_grafo[self.dados[i][2]] = list()
-            for i in range(0, len(self.dados)):
-                if len(self.dados[i]) == 3:
-                    if self.dados[i][2] not in self.dicionario_grafo[self.dados[i][0]]:
-                        self.dicionario_grafo[self.dados[i][0]].append(self.dados[i][2])
-
-    # Complexidade de tempo: O(n)
-
-    def mostrar_dicionario(self):
-        for k, v in self.dicionario_grafo.items():
-            print(f'{k}: {v}')
-
-
-# Complexidade: O(n)
 
 import os
 
@@ -98,7 +28,6 @@ class grafos:
                 print('Primeira linha do arquivo deve ser preenchida apenas com "directed" ou "undirected"')
                 exit(1)
             del (self.dados[0])
-            print(self.dados)
 
     def criar_dicionario(self):  # Complexidade de tempo: O(n)
         if not self.directed:
@@ -125,10 +54,6 @@ class grafos:
                 if self.dados[i][2] not in self.dicionario_grafo[self.dados[i][0]]:
                     self.dicionario_grafo[self.dados[i][0]].append(self.dados[i][2])
 
-    def mostrar_grafo(self):
-        for k, v in self.dicionario_grafo.items():
-            print(f'{k}: {v}')
-
     def elementos_ordenados(self):
         lista_elementos = list()
         for i in range(0, len(self.dados)):
@@ -141,21 +66,6 @@ class grafos:
         lista_elementos.sort()
         return lista_elementos
 
-    def criar_matriz_adjacencia(self):
-        ordenada = self.elementos_ordenados()
-
-        if ' ' in ordenada:
-            quant_vertice = len(ordenada) - 1
-        else:
-            quant_vertice = len(ordenada)
-        self.matriz = [[0] * quant_vertice for i in range(quant_vertice)]  # criação da matriz que só tem zero
-
-        for i in range(0, len(self.dados)):
-            self.matriz[ordenada.index(self.dados[i][0])][ordenada.index(self.dados[i][2])] = 1
-        for i in range(quant_vertice):
-            print(self.matriz[i])
-
-    # OK
     def inserir_vertice(self, vertice):
         self.vertices = vertice
         if self.vertices not in self.dicionario_grafo:
@@ -166,8 +76,6 @@ class grafos:
         else:
             print(f"\nO vertice '{self.vertices}' já faz parte do grafo!!!\n")
 
-    # OK para direcionado
-    # OK para não direcionado
     def inserir_aresta(self, v1, v2):
         self.v1 = v1
         self.v2 = v2
@@ -199,25 +107,6 @@ class grafos:
             elif v2 not in self.dicionario_grafo.keys():
                 print(f'{v2} Não é um vertice do grafo')
 
-    # OK direcionado
-    # OK não direcionado
-    def verifica_Aresta(self, v1, v2):
-        self.criar_dicionario()
-        self.v1 = v1
-        self.v2 = v2
-
-        if self.directed:
-            if self.v1 in self.dicionario_grafo.keys():
-                if self.v2 in self.dicionario_grafo[self.v1]:
-                    print(f'A aresta {self.v1} -> {self.v2} existe')
-                print(f'A aresta {self.v1} -> {self.v2} não existe')
-        else:
-            if self.v2 in self.dicionario_grafo[self.v1] and self.v1 in self.dicionario_grafo[self.v2]:
-                print(f'A aresta {self.v1} -> {self.v2} existe')
-            else:
-                print(f'A aresta {self.v1} -> {self.v2} não existe')
-
-    # OK
     def remover_vertice(self, vertice):
         if vertice in self.dicionario_grafo.keys():
             self.dicionario_grafo.pop(vertice)
@@ -234,8 +123,6 @@ class grafos:
                 del v[v.index(vertice)]
         print(self.dicionario_grafo)
 
-    # OK para direcionado
-    # OK para não direcionado
     def remover_aresta(self, v1, v2):
         self.v1 = v1
         self.v2 = v2
@@ -274,6 +161,41 @@ class grafos:
                     if self.v1 in v:
                         del v[v.index(self.v1)]
                         pass
+
+
+    def mostrar_grafo(self):
+        for k, v in self.dicionario_grafo.items():
+            print(f'{k}: {v}')
+
+    def matriz_adjacencia(self):
+        ordenada = self.elementos_ordenados()
+
+        if ' ' in ordenada:
+            quant_vertice = len(ordenada) - 1
+        else:
+            quant_vertice = len(ordenada)
+        self.matriz = [[0] * quant_vertice for i in range(quant_vertice)]  # criação da matriz que só tem zero
+
+        for i in range(0, len(self.dados)):
+            self.matriz[ordenada.index(self.dados[i][0])][ordenada.index(self.dados[i][2])] = 1
+        for i in range(quant_vertice):
+            print(self.matriz[i])
+
+    def verifica_aresta(self, v1, v2):
+        self.criar_dicionario()
+        self.v1 = v1
+        self.v2 = v2
+
+        if self.directed:
+            if self.v1 in self.dicionario_grafo.keys():
+                if self.v2 in self.dicionario_grafo[self.v1]:
+                    print(f'A aresta {self.v1} -> {self.v2} existe')
+                print(f'A aresta {self.v1} -> {self.v2} não existe')
+        else:
+            if self.v2 in self.dicionario_grafo[self.v1] and self.v1 in self.dicionario_grafo[self.v2]:
+                print(f'A aresta {self.v1} -> {self.v2} existe')
+            else:
+                print(f'A aresta {self.v1} -> {self.v2} não existe')
 
     def verificar_vertices_adjacentes(self, vertice):
         vertices_adjacentes = list()
@@ -326,22 +248,7 @@ class grafos:
 
 
 g = grafos()
-k = grafos()
 g.import_graph('grafo.txt')
-g.criar_matriz_adjacencia()
 g.criar_dicionario()
 
-print('')
 g.mostrar_grafo()
-print(g.verificar_vertices_incidentes('b'))
-
-k.grafo_transposto(g)
-
-
-
-
-
-
-
-
-

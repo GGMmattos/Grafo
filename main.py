@@ -210,21 +210,24 @@ class grafos:
             else:
                 print(f'A aresta {self.v1} -> {self.v2} não existe')
 
-    #Complexidade: Theta(n)
-    def verificar_vertices_adjacentes(self, vertice):
-        vertices_adjacentes = list()
-        ordenada = self.elementos_ordenados()
-        tamanho = len(g.elementos_ordenados())
-        posicao = ordenada.index(vertice)
-        for i in range(0, tamanho): #Lê a linha e coluna
-            if self.matriz[posicao][i] == 1:
-                vertices_adjacentes.append(ordenada[i])
-            if self.matriz[i][posicao] == 1:
-                vertices_adjacentes.append(ordenada[i])
-                #A matriz é ordenada em ordem alfabetica, o que justifica essa operação
-        vertices_adjacentes = set(vertices_adjacentes)  # remove valores duplicados7
+    # #Complexidade: Theta(n)
+    # def verificar_vertices_adjacentes(self, vertice):
+    #     vertices_adjacentes = list()
+    #     ordenada = self.elementos_ordenados()
+    #     tamanho = len(g.elementos_ordenados())
+    #     posicao = ordenada.index(vertice)
+    #     for i in range(0, tamanho): #Lê a linha e coluna
+    #         if self.matriz[posicao][i] == 1:
+    #             vertices_adjacentes.append(ordenada[i])
+    #         if self.matriz[i][posicao] == 1:
+    #             vertices_adjacentes.append(ordenada[i])
+    #             #A matriz é ordenada em ordem alfabetica, o que justifica essa operação
+    #     vertices_adjacentes = set(vertices_adjacentes)  # remove valores duplicados7
+    #
+    #     return print(f'\nVertice(s) adjacente de {vertice}: {vertices_adjacentes}\n')
 
-        return print(f'\nVertice(s) adjacente de {vertice}: {vertices_adjacentes}\n')
+    def verifica_adjacentes(self, vertice): #O(1)
+        print(f'\nO(s) adjacente(s) de {vertice}: {self.lista_adjacencia[vertice]}\n')
 
     #Complexidade: Theta(n)
     def verificar_vertices_incidentes(self, vertice): #Vertice deve ser string
@@ -266,15 +269,9 @@ class grafos:
             print(self.matriz[i])
 
 
-# g = grafos()
-# g.import_graph('grafo.txt') #
-# g.criar_dicionario()
-# g.matriz_adjacencia()
-# k = grafos()
-#
-# g.verificar_vertices_adjacentes('b')
-# g.verificar_vertices_incidentes('b')
-# print()
-
-
-#para verificar vertices adjacentes tem q ter feito a matriz
+g = grafos()
+g.import_graph('grafo.txt') #
+g.criar_dicionario()
+g.matriz_adjacencia()
+k = grafos()
+g.verifica_adjacentes('a')

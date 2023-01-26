@@ -1,6 +1,6 @@
 # Trabalho-1-Grafos
 
-1.Ler de um arquivo a especificação de um grafo e representá-lo computacionalmente por listas de adjacência.
+1.Ler de um arquivo a especificação de um grafo e representá-lo computacionalmente por listas de adjacência.✔
 A primeira linha do arquivo contém informação se o grafo é orientado (directed) ou não (undirected). ✔️
 
 2. Desenvolver operações para inserção e remoção de vértices e arestas.✔️
@@ -15,8 +15,8 @@ A primeira linha do arquivo contém informação se o grafo é orientado (direct
 
 7. Desenvolver uma função que devolve todos os vértices que são incidentes em um vértice.✔️
 
-8. Desenvolver uma função que devolve o grafo complemento.
+8. Desenvolver uma função que devolve o grafo complemento.✔️
 
-9. Desenvolver uma função que devolve o grafo transposto (grafo formado pela inversão de todas as arestas).
+9. Desenvolver uma função que devolve o grafo transposto (grafo formado pela inversão de todas as arestas).✔️
 
-10. Para cada item acima, deixe na forma de comentário qual a complexidade de tempo das funções que você desenvolveu.
+10. Para cada item acima, deixe na forma de comentário qual a complexidade de tempo das funções que você desenvolveu.✔️

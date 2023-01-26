@@ -3,12 +3,16 @@
 
 import os
 class grafos:
-    def __init__(self, dados=None, lista_adjacencia=None, vertices=None, directed=False, quant_vertice=None):
+    def __init__(self, dados=None, lista_adjacencia=None, vertices=None, directed=False, quant_vertice=None, lista_complemento=None):
         self.v2 = None
         self.v1 = None
         if lista_adjacencia is None:
             lista_adjacencia = {}
+            lista_complemento = {}
+
             dados = []
+
+        self.lista_complemento = lista_complemento
         self.lista_adjacencia = lista_adjacencia
         self.dados = dados
         self.vertices = vertices
@@ -32,7 +36,6 @@ class grafos:
                 exit(1)
             del (self.dados[0])
 
-
     #Complexidade: Theta(n) | n = tamanho de dados
     def criar_dicionario(self):  # Complexidade de tempo: O(n)
         if not self.directed:
@@ -42,7 +45,7 @@ class grafos:
                 self.lista_adjacencia[self.dados[i][2]] = list()
                 if (self.dados[i][0], self.dados[i][2]) not in self.dados:
                     self.dados.append(self.dados[i][2] + ' ' + self.dados[i][0]) #PARA GRAFO NÃO ORIENTADO É CRIADA A RESTA INVERSA
-            print(self.dados)
+
             for i in range(0, len(self.dados)):
                 if self.dados[i][2] not in self.lista_adjacencia[self.dados[i][0]]: #Se V2 já está na lista de V1(é adjacente)
                     self.lista_adjacencia[self.dados[i][0]].append(self.dados[i][2]) #Caso não esteja o V2 é adicionado a lista de V1
@@ -243,17 +246,27 @@ class grafos:
 
 
     #Complexidade: Theta(n²)
-    def grafo_complemento(self, base):#Lê a matriz de um grafo e coloca em outro
-        tamanho = len(g.elementos_ordenados())
-        self.matriz = [[0] * tamanho for i in range(tamanho)]
-        for i in range(0, tamanho): #O que é linha vira coluna, e vice-versa
-            for j in range(0, tamanho):
-                if base.matriz[i][j] == 1:
-                    self.matriz[i][j] = 0
-                else:
-                    self.matriz[i][j] = 1
-        for i in range(tamanho):
-            print(self.matriz[i])
+    def grafo_complemento(self):#Lê a matriz de um grafo e coloca em outro #foi excluido o argumento base
+
+        for i in self.lista_adjacencia.keys():
+            key = i
+            self.lista_complemento[key] = list
+
+
+        for k, v in self.lista_complemento.items():
+            lista_complemento = 
+
+
+        # tamanho = len(g.elementos_ordenados())
+        # self.matriz = [[0] * tamanho for i in range(tamanho)]
+        # for i in range(0, tamanho): #O que é linha vira coluna, e vice-versa
+        #     for j in range(0, tamanho):
+        #         if base.matriz[i][j] == 1:
+        #             self.matriz[i][j] = 0
+        #         else:
+        #             self.matriz[i][j] = 1
+        # for i in range(tamanho):
+        #     print(self.matriz[i])
 
     #Complexidade: Theta(n²)
     def grafo_transposto(self, base): #Lê a matriz de um grafo e coloca em outro
@@ -272,6 +285,7 @@ class grafos:
 g = grafos()
 g.import_graph('grafo.txt') #
 g.criar_dicionario()
-g.matriz_adjacencia()
-k = grafos()
-g.verifica_adjacentes('a')
+# g.matriz_adjacencia()
+# k = grafos()
+# g.verifica_adjacentes('a')
+g.grafo_complemento()

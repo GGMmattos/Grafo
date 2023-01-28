@@ -6,7 +6,9 @@ class grafos:
     def __init__(self, dados=None, lista_adjacencia=None, vertices=None, directed=False, quant_vertice=None, lista_complemento=None):
         self.v2 = None
         self.v1 = None
+
         if lista_adjacencia is None:
+            lista_complemento = {}
             lista_adjacencia = {}
             dados = []
 
@@ -33,24 +35,26 @@ class grafos:
                 print('Primeira linha do arquivo deve ser preenchida apenas com "directed" ou "undirected"')
                 exit(1)
             del (self.dados[0])
+        return self.dados
 
     #Complexidade: Theta(n) | n = tamanho de dados
-    def criar_dicionario(self):  # Complexidade de tempo: O(n)
+    def criar_dicionario(self, lista):  # Complexidade de tempo: O(n)
         if not self.directed:
             print('Modo Não Direcionado')
-            for i in range(0, len(self.dados)): #UTILIZADO DICIONÁRIOS COM LISTAS -
-                self.lista_adjacencia[self.dados[i][0]] = list()    #ATRIBUIÇÃO AOS ELEMENTOS NA LISTA
-                self.lista_adjacencia[self.dados[i][2]] = list()
-                if (self.dados[i][0], self.dados[i][2]) not in self.dados:
-                    self.dados.append(self.dados[i][2] + ' ' + self.dados[i][0]) #PARA GRAFO NÃO ORIENTADO É CRIADA A RESTA INVERSA
+            for i in range(0, len(lista)): #UTILIZADO DICIONÁRIOS COM LISTAS -
+                self.lista_adjacencia[lista[i][0]] = list()    #ATRIBUIÇÃO AOS ELEMENTOS NA LISTA
+                self.lista_adjacencia[lista[i][2]] = list()
+                if (lista[i][0], lista[i][2]) not in lista:
+                    lista.append(lista[i][2] + ' ' + lista[i][0]) #PARA GRAFO NÃO ORIENTADO É CRIADA A RESTA INVERSA
 
-            for i in range(0, len(self.dados)):
-                if self.dados[i][2] not in self.lista_adjacencia[self.dados[i][0]]: #Se V2 já está na lista de V1(é adjacente)
-                    self.lista_adjacencia[self.dados[i][0]].append(self.dados[i][2]) #Caso não esteja o V2 é adicionado a lista de V1
-                if self.dados[i][0] not in self.lista_adjacencia[self.dados[i][2]]: #Se V1 já está na lista de V2(é adjacente)
-                    self.lista_adjacencia[self.dados[i][2]].append(self.dados[i][0]) #Caso não esteja o V2 é adicionado a lista de V1
+            for i in range(0, len(lista)):
+                if lista[i][2] not in self.lista_adjacencia[lista[i][0]]: #Se V2 já está na lista de V1(é adjacente)
+                    self.lista_adjacencia[lista[i][0]].append(lista[i][2]) #Caso não esteja o V2 é adicionado a lista de V1
+                if lista[i][0] not in self.lista_adjacencia[lista[i][2]]: #Se V1 já está na lista de V2(é adjacente)
+                    self.lista_adjacencia[lista[i][2]].append(lista[i][0]) #Caso não esteja o V2 é adicionado a lista de V1
 
-        #Complexidade: Theta(n) | n = tamanho de dados
+            return self.lista_adjacencia
+
         elif self.directed:
             print('Modo Direcionado')
             for i in range(0, len(self.dados)):
@@ -97,6 +101,8 @@ class grafos:
                 if v1_v2 not in self.dados:
                     self.dados.append(v1_v2) #Adiciona na lista
                     self.lista_adjacencia[v1].append(v2) #Adiciona no dicionário (lista de adjacencia)
+                    print(f'\nAresta {v1} --> {v2} adicionada\n')
+                    g.mostrar_grafo()
                 else:
                     print(f"\nA aresta {v1} --> {v2} já existe!!!")
             else:
@@ -106,6 +112,9 @@ class grafos:
 
                     self.lista_adjacencia[self.v1].append(v2)#Adiciona aresta ao dicionário
                     self.lista_adjacencia[self.v2].append(v1)
+                    print(f'\nAresta {v1} <--> {v2} foi adicionada\n')
+                    g.mostrar_grafo()
+
                 else:
                     print(f"\nA aresta {v1} <--> {v2} já existe!!!")
         else:
@@ -182,7 +191,8 @@ class grafos:
             self.quant_vertice = len(ordenada) - 1
         else:
             self.quant_vertice = len(ordenada)
-        self.matriz = [[0] *  self.quant_vertice for i in range(self.quant_vertice)]  # criação da matriz que só tem zero
+
+        self.matriz = [[0] * self.quant_vertice for i in range(self.quant_vertice)]  #criação da matriz que só tem zero
 
         for i in range(0, len(self.dados)):
             x = ordenada.index(self.dados[i][0])
@@ -196,7 +206,6 @@ class grafos:
 
     #Complexidade: Theta(1)
     def verifica_aresta(self, v1, v2):
-        self.criar_dicionario()
         self.v1 = v1
         self.v2 = v2
 
@@ -207,9 +216,9 @@ class grafos:
                 print(f'A aresta {self.v1} -> {self.v2} não existe')
         else:
             if self.v2 in self.lista_adjacencia[self.v1] and self.v1 in self.lista_adjacencia[self.v2]:
-                print(f'A aresta {self.v1} -> {self.v2} existe')
+                print(f'\nA aresta {self.v1} -> {self.v2} existe\n')
             else:
-                print(f'A aresta {self.v1} -> {self.v2} não existe')
+                print(f'\nA aresta {self.v1} -> {self.v2} não existe\n')
 
     # #Complexidade: Theta(n)
     # def verificar_vertices_adjacentes(self, vertice):
@@ -242,20 +251,36 @@ class grafos:
 
         return print(f'\nVertice(s) incidente de {vertice}: {vertices_incidentes}\n')
 
-
     #Complexidade: Theta(n²)
-    def grafo_complemento(self, base):#Lê a matriz de um grafo e coloca em outro #foi excluido o argumento base
+    def grafo_complemento(self):#Lê a matriz de um grafo e coloca em outro #foi excluido o argumento base
 
-        tamanho = len(g.elementos_ordenados())
-        self.matriz = [[0] * tamanho for i in range(tamanho)]
-        for i in range(0, tamanho): #O que é linha vira coluna, e vice-versa
-            for j in range(0, tamanho):
-                if base.matriz[i][j] == 1:
-                    self.matriz[i][j] = 0
-                else:
-                    self.matriz[i][j] = 1
-        for i in range(tamanho):
-            print(self.matriz[i])
+        if self.directed:
+            for i in range(0, len(self.dados)):
+                self.lista_complemento[self.dados[i][0]] = list()
+                self.lista_complemento[self.dados[i][2]] = list()
+
+            for i in range(0, len(self.dados)):
+                if self.dados[i][0] not in self.lista_complemento[self.dados[i][2]]:#Se V2 já está na lista de V1(é adjacente)
+                    self.lista_complemento[self.dados[i][2]].append(self.dados[i][0]) #Caso não esteja o V2 é adicionado a lista de V1
+
+            print('\nGrafo complemento\n')
+
+            for k, v in self.lista_complemento.items():
+                print(f'{k}: {v}')
+
+        else:
+            print('Não é possível realizar a operação, o grafo não é orientado')
+
+        # tamanho = len(g.elementos_ordenados())
+        # self.matriz = [[0] * tamanho for i in range(tamanho)]
+        # for i in range(0, tamanho): #O que é linha vira coluna, e vice-versa
+        #     for j in range(0, tamanho):
+        #         if base.matriz[i][j] == 1:
+        #             self.matriz[i][j] = 0
+        #         else:
+        #             self.matriz[i][j] = 1
+        # for i in range(tamanho):
+        #     print(self.matriz[i])
 
     #Complexidade: Theta(n²)
     def grafo_transposto(self, base): #Lê a matriz de um grafo e coloca em outro
@@ -267,13 +292,7 @@ class grafos:
                     self.matriz[j][i] = 1
                 else:
                     self.matriz[j][i] = 0
+        print('\nGrafo transposto\n')
         for i in range(tamanho):
             print(self.matriz[i])
-
-
 g = grafos()
-g.import_graph('grafo.txt') #
-g.criar_dicionario()
-# g.matriz_adjacencia()
-# k = grafos()
-# g.verifica_adjacentes('a')
